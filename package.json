@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/The-HMI-Guy/Solidity-RoadToWeb3-Week3/issues"
   },
-  "homepage": "https://github.com/The-HMI-Guy/Solidity-RoadToWeb3-Week3#readme"
+  "homepage": "https://github.com/The-HMI-Guy/Solidity-RoadToWeb3-Week3#readme",
+  "dependencies": {
+    "hardhat": "^2.10.1"
+  }
 }
