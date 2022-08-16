@@ -7,6 +7,8 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
 
+
+// Contract deployed at 0x59AE2a145b8245863875CF83D00D834Fe77f7eF6
 contract ChainBattles is ERC721URIStorage{
     using Strings for uint256;
     using Counters for Counters.Counter;
