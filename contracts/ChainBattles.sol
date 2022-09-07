@@ -15,13 +15,16 @@ contract ChainBattles is ERC721URIStorage{
     Counters.Counter private _tokenIds;
 
     // Struct for different attributes for a warrior
-    struct attributes {
+    struct WarriorAttributes {
         uint256 levels;
         uint256 hp;
         uint256 strength;
         uint256 speed;
     }
-    mapping(uint256 => attributes) public tokenIdtoAttributes;
+
+    WarriorAttributes attributes;
+
+    mapping(uint256 => WarriorAttributes) public tokenIdtoAttributes;
     mapping(uint256 => uint256) public tokenIdtoLevels;
 
     constructor() ERC721("Chain Battles","CBTLS"){
@@ -66,11 +69,13 @@ contract ChainBattles is ERC721URIStorage{
         uint256 newItemId = _tokenIds.current();
 
         uint256 randNum = newItemId;
-        attributes memory stats;
+        WarriorAttributes memory stats;
         stats.levels = randomNumGenerator(randNum++);
-        stats.levels = randomNumGenerator(randNum++);
-       //tokenIdtoLevels[newItemId] = 0;
+        stats.hp = randomNumGenerator(randNum++);
+        stats.strength = randomNumGenerator(randNum++);
+        stats.speed = randomNumGenerator(randNum++);
 
+        tokenIdtoAttributes[newItemId] = stats;
 
        _safeMint(msg.sender, newItemId);
        _setTokenURI(newItemId, getTokenURI(newItemId)); 
@@ -89,8 +94,12 @@ contract ChainBattles is ERC721URIStorage{
         require(_exists(tokenId), "Please use an exisiting token!");
         require(ownerOf(tokenId) == msg.sender, "You must own this token to train it");
 
-        uint256 currentLevel = tokenIdtoLevels[tokenId];
-        tokenIdtoLevels[tokenId] = currentLevel + 1;
+        uint256 randNum = tokenId;
+        attributes.levels = randomNumGenerator(randNum++);
+        attributes.hp = randomNumGenerator(randNum++);
+        attributes.strength = randomNumGenerator(randNum++);
+        attributes.speed = randomNumGenerator(randNum++);
+        tokenIdtoAttributes[tokenId] = attributes;
         _setTokenURI(tokenId, getTokenURI(tokenId));
     }
 }
