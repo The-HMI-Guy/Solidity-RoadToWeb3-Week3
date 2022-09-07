@@ -64,9 +64,25 @@ contract ChainBattles is ERC721URIStorage{
     function mint() public {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _safeMint(msg.sender, newItemId);
-       tokenIdtoLevels[newItemId] = 0;
+
+        uint256 randNum = newItemId;
+        attributes memory stats;
+        stats.levels = randomNumGenerator(randNum++);
+        stats.levels = randomNumGenerator(randNum++);
+       //tokenIdtoLevels[newItemId] = 0;
+
+
+       _safeMint(msg.sender, newItemId);
        _setTokenURI(newItemId, getTokenURI(newItemId)); 
+    }
+
+    function randomNumGenerator(uint256 randNum) public view returns (uint256) {
+        return
+            uint256(
+                keccak256(
+                    abi.encodePacked(block.timestamp, msg.sender, randNum)
+                )
+            ) % 100;
     }
 
     function train(uint256 tokenId) public {
