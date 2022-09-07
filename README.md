@@ -7,3 +7,5 @@
 [![Thumbnail](https://img.youtube.com/vi/8FJvY4zXvPE/maxresdefault.jpg)](https://youtu.be/8FJvY4zXvPE)
 
 ## Additional Links
+
+- Opensea Test: https://testnets.opensea.io/assets/mumbai/0x59ae2a145b8245863875cf83d00d834fe77f7ef6/1
