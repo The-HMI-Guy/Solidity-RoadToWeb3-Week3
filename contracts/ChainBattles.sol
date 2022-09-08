@@ -31,12 +31,17 @@ contract ChainBattles is ERC721URIStorage{
 
     }
     function generateCharacter(uint256 tokenId) public view returns (string memory){
+        WarriorAttributes memory stats = tokenIdtoAttributes[tokenId];
+        
         bytes memory svg = abi.encodePacked(
             '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">',
             '<style>.base { fill: white; font-family: serif; font-size: 14px; }</style>',
             '<rect width="100%" height="100%" fill="black" />',
-            '<text x="50%" y="40%" class="base" dominant-baseline="middle" text-anchor="middle">',"Warrior",'</text>',
-            '<text x="50%" y="50%" class="base" dominant-baseline="middle" text-anchor="middle">', "Levels: ",getLevels(tokenId),'</text>',
+        '<text x="50%" y="40%" class="base" dominant-baseline="middle" text-anchor="middle">',"Warrior Attributes",'</text>',
+        '<text x="50%" y="50%" class="base" dominant-baseline="middle" text-anchor="middle">', "Level: ",stats.levels.toString(),'</text>',
+        '<text x="50%" y="60%" class="base" dominant-baseline="middle" text-anchor="middle">', "HP: ",stats.hp.toString(),'</text>',
+        '<text x="50%" y="70%" class="base" dominant-baseline="middle" text-anchor="middle">', "Strength: ",stats.strength.toString(),'</text>',
+        '<text x="50%" y="80%" class="base" dominant-baseline="middle" text-anchor="middle">', "Speed: ",stats.speed.toString(),'</text>',
             '</svg>'
             );
             return string(
@@ -82,12 +87,7 @@ contract ChainBattles is ERC721URIStorage{
     }
 
     function randomNumGenerator(uint256 randNum) public view returns (uint256) {
-        return
-            uint256(
-                keccak256(
-                    abi.encodePacked(block.timestamp, msg.sender, randNum)
-                )
-            ) % 100;
+        return uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender, randNum))) % 100;
     }
 
     function train(uint256 tokenId) public {
